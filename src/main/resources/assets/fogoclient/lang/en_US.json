@@ -1,0 +1,13 @@
+{
+  "keys.fogoclient.category": "Fogo Client",
+  "keys.fogoclient.menu": "Open Menu",
+  "keys.fogoclient.openhud": "Toggle Hud",
+  "keys.fogoclient.togglexray": "Toggle X-Ray",
+
+  "gui.fogoclient.settings": "Settings",
+  "gui.fogoclient.toggle": "Toggle",
+  "gui.fogoclient.menu.main": "Main",
+  "gui.fogoclient.menu.overlay": "Overlay",
+  "gui.fogoclient.menu.hud": "HUD",
+  "gui.fogoclient.menu.xray": "X-Ray"
+}
