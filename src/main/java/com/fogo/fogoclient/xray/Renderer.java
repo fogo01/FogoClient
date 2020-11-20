@@ -3,26 +3,20 @@ package com.fogo.fogoclient.xray;
 import com.fogo.fogoclient.FogoClient;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.block.PortalInfo;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.tileentity.BeaconTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 
 import java.awt.*;
@@ -181,7 +175,7 @@ public class Renderer {
         }
     }
 
-    private static void text(String text, Vector3d pos, MatrixStack matrixStack) {
+    private static void _text(String text, Vector3d pos, MatrixStack matrixStack) {
         matrixStack.push();
         float scale = 0.05f;
 
@@ -192,6 +186,28 @@ public class Renderer {
         matrixStack.rotate(Vector3f.XP.rotationDegrees(-mc.player.rotationPitch));
 
         mc.fontRenderer.drawStringWithShadow(matrixStack, text, 0, 0, 0xFFFFFFFF);
+
+        matrixStack.pop();
+    }
+
+    private static void text(String text, Vector3d pos, MatrixStack matrixStack) {
+        matrixStack.push();
+
+        double sqrDistance = (pos.getX()-mc.player.getPosX())*(pos.getX()-mc.player.getPosX()) + (pos.getY()-mc.player.getPosY())*(pos.getY()-mc.player.getPosY()) + (pos.getZ()-mc.player.getPosZ())*(pos.getZ()-mc.player.getPosZ());
+        float scale = (float) (0.025F * Math.sqrt(sqrDistance)*.5F);
+
+        matrixStack.translate(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
+        matrixStack.rotate(mc.getRenderManager().getCameraOrientation());
+        matrixStack.scale(-scale, -scale, scale);
+        Matrix4f matrix4f = matrixStack.getLast().getMatrix();
+        float f1 = Minecraft.getInstance().gameSettings.getTextBackgroundOpacity(0.25F);
+        int j = (int)(f1 * 255.0F) << 24;
+        FontRenderer fontrenderer = mc.fontRenderer;// getFontRendererFromRenderManager();
+        float f2 = (float)(-fontrenderer.getStringPropertyWidth(new TranslationTextComponent(text)) / 2);
+        // text, x, y, color, shadow, matrix4f, buffer, x-ray, bg-color, alpha?
+        fontrenderer.func_243247_a(new TranslationTextComponent(text), f2, 0, -1, true, matrix4f, mc.getRenderTypeBuffers().getCrumblingBufferSource(), true, 0, 100);
+
+        //mc.fontRenderer.drawStringWithShadow(matrixStack, text, f2, 0, 0xFFFFFFFF);
 
         matrixStack.pop();
     }
