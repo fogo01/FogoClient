@@ -1,6 +1,6 @@
 package com.fogo.fogoclient.hud;
 
-import com.fogo.fogoclient.Config;
+import com.fogo.fogoclient.settings.Config;
 import com.fogo.fogoclient.FogoClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

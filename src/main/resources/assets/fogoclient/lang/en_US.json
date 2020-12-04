@@ -4,10 +4,25 @@
   "keys.fogoclient.openhud": "Toggle Hud",
   "keys.fogoclient.togglexray": "Toggle X-Ray",
 
-  "gui.fogoclient.settings": "Settings",
+  "gui.fogoclient.config": "Config",
   "gui.fogoclient.toggle": "Toggle",
+  "gui.fogoclient.back": "<-",
   "gui.fogoclient.menu.main": "Main",
+  "gui.fogoclient.config.main": "Main Config",
+  "gui.fogoclient.menu.navigation": "Navigation",
+  "gui.fogoclient.config.navigation": "Navigation Config",
+  "gui.fogoclient.menu.navigationtarget": "Navigation Target",
+  "gui.fogoclient.menu.waypoints": "Waypoints",
+  "gui.fogoclient.waypoints": "Waypoints",
+  "gui.fogoclient.waypoints.add": "Add New",
+  "gui.fogoclient.waypoints.edit": "Edit",
+  "gui.fogoclient.waypoints.delete": "Delete",
+  "gui.fogoclient.addwaypoint": "Add A Waypoint",
+  "gui.fogoclient.waypoints.save": "Save",
   "gui.fogoclient.menu.overlay": "Overlay",
+  "gui.fogoclient.config.overlay": "Overlay Config",
   "gui.fogoclient.menu.hud": "HUD",
-  "gui.fogoclient.menu.xray": "X-Ray"
+  "gui.fogoclient.config.hud": "HUD Config",
+  "gui.fogoclient.menu.xray": "X-Ray",
+  "gui.fogoclient.config.xray": "X-Ray Config"
 }

@@ -1,8 +1,8 @@
 package com.fogo.fogoclient;
 
+import com.fogo.fogoclient.settings.Config;
 import com.fogo.fogoclient.settings.Keybindings;
 import com.fogo.fogoclient.reference.Reference;
-import com.fogo.fogoclient.xray.Xray;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;

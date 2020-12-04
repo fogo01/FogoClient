@@ -1,6 +1,7 @@
 package com.fogo.fogoclient.xray;
 
 import com.fogo.fogoclient.FogoClient;
+import com.fogo.fogoclient.settings.Colors;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.Minecraft;
@@ -33,8 +34,8 @@ public class Renderer {
         String name = mc.world.getBlockState(pos).getBlock().getTranslationKey();
 
         IVertexBuilder builder = buffer.getBuffer(MyRenderType.OVERLAY_LINES);
-        if(Xray.ores.containsKey(name)) {
-            Color color = new Color(Xray.ores.get(name));
+        if(Colors.ores.containsKey(name)) {
+            Color color = new Color(Colors.ores.get(name));
 
             star(builder, positionMatrix, pos, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
             //box(builder, positionMatrix, pos, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
@@ -97,8 +98,8 @@ public class Renderer {
             String name = spawner.getSpawnerBaseLogic().getCachedEntity().getEntityString();
             text(name, new Vector3d(pos.getX(), pos.getY(), pos.getZ()), event.getMatrixStack());
 
-            if(Xray.spawnerEntities.containsKey(name)) {
-                Color color = new Color(Xray.spawnerEntities.get(name));
+            if(Colors.entities.containsKey(name)) {
+                Color color = new Color(Colors.entities.get(name));
 
                 cross(builder, positionMatrix, pos, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
             }
@@ -160,8 +161,9 @@ public class Renderer {
         Matrix4f positionMatrix = matrixStack.getLast().getMatrix();
 
         Color color = Color.white;
-        String name = entity.getEntityString();if(Xray.spawnerEntities.containsKey(name)) {
-            color = new Color(Xray.spawnerEntities.get(name));
+        String name = entity.getEntityString();
+        if(Colors.entities.containsKey(name)) {
+            color = new Color(Colors.entities.get(name));
         }
 
         line(builder, positionMatrix, new Vector3f(0, 0, 0), new Vector3f(0, entity.getHeight(), 0), color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);

@@ -1,4 +1,4 @@
-package com.fogo.fogoclient;
+package com.fogo.fogoclient.settings;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Config {
     public static final String CATEGORY_GENERAL = "general";
     public static final String CATEGORY_HUD = "hud";
+    public static final String CATEGORY_NAVIGATION = "navigation";
     public static final String CATEGORY_XRAY = "X-Ray";
 
     public static ForgeConfigSpec CLIENT_CONFIG;
@@ -21,6 +22,10 @@ public class Config {
         public static ForgeConfigSpec.BooleanValue SHOW_SPEED;
         public static ForgeConfigSpec.BooleanValue SHOW_WORLDSPAWN;
         public static ForgeConfigSpec.BooleanValue SHOW_BIOME;
+    }
+
+    public static class NAVIGATION {
+
     }
 
     public static class XRAY {
@@ -53,6 +58,10 @@ public class Config {
             HUD.SHOW_SPEED = CLIENT_BUILDER.comment("Whether the player's speed should be shown or not").define("showSpeed", true);
             HUD.SHOW_WORLDSPAWN = CLIENT_BUILDER.comment("Whether the world spawn should be shown or not").define("showWorldSpawn", true);
             HUD.SHOW_BIOME = CLIENT_BUILDER.comment("Whether the player's current biome should be shown or not").define("showBiome", true);
+        CLIENT_BUILDER.pop();
+
+        CLIENT_BUILDER.comment("Navigation settings").push(CATEGORY_NAVIGATION);
+
         CLIENT_BUILDER.pop();
 
         CLIENT_BUILDER.comment("X-Ray settings").push(CATEGORY_XRAY);

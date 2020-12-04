@@ -2,11 +2,20 @@ package com.fogo.fogoclient.handler;
 
 import com.fogo.fogoclient.FogoClient;
 import com.fogo.fogoclient.hud.Hud;
+import com.fogo.fogoclient.navigation.Navigation;
+import com.fogo.fogoclient.navigation.Waypoint;
 import com.fogo.fogoclient.overlay.Overlay;
 import com.fogo.fogoclient.xray.Entities;
 import com.fogo.fogoclient.xray.Xray;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -45,6 +54,19 @@ public class MyStaticClientOnlyEventHandler {
         RenderSystem.popMatrix()
     }*/
 
+    @SubscribeEvent
+    public static void loadWorld(WorldEvent.Load event) {
+        Navigation.LoadWaypoints();
+    }
+
+    @SubscribeEvent
+    public static void playerDeath(LivingDeathEvent event) {
+        Entity e = event.getEntityLiving();
+
+        if(e instanceof PlayerEntity && e.equals(FogoClient.mc.player)) {
+            Navigation.AddDeathPoint(e);
+        }
+    }
 
     @SubscribeEvent
     public static void renderWorld(RenderWorldLastEvent event) {
@@ -54,6 +76,8 @@ public class MyStaticClientOnlyEventHandler {
         Xray.Render(event);
 
         Overlay.RenderOverlay(event, FogoClient.mc);
+
+        Navigation.RenderNavigation(event, FogoClient.mc);
     }
 
     @SubscribeEvent
